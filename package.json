@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
@@ -10,9 +11,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "imports": {
+    "#routes/*": "./src/routes/*",
+    "#controllers/*": "./src/controllers/*",
+    "#services/*": "./src/services/*",
+    "#models/*": "./src/models/*",
+    "#validators/*": "./src/validators/*"
+  },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "modern-normalize": "^2.0.0"
+    "modern-normalize": "^2.0.0",
+    "mongoose": "^8.0.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
