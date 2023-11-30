@@ -1,6 +1,8 @@
 import express from "express";
 // import logger from "morgan";
 import cors from "cors";
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
 import transactionRouter from "#routes/transactionRoutes.js";
 import dotenv from "dotenv";
 // import "#config/passport.js";
@@ -14,7 +16,24 @@ dotenv.config();
 app.use(cors());
 app.use(express.json());
 
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "GoIT Wallet by FinanSync Team",
+      version: "1.0.0",
+      description: "Personal budget app",
+    },
+  },
+  apis: ["./routes/*.js"],
+};
+
+const swaggerSpec = swaggerJsdoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); //shows Swagger documentation
+
 app.use("/api/transactions", transactionRouter); //returns [] list of all transactions
+
+// Error handling
 
 const PORT = process.env.PORT || 3000;
 
