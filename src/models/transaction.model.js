@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose;
 
 const TransactionSchema = new Schema({
   type: {
@@ -38,4 +39,4 @@ const TransactionSchema = new Schema({
 });
 
 const Transaction = mongoose.model('Transaction', TransactionSchema);
-module.exports = Transaction;
+export default Transaction;
