@@ -1,22 +1,20 @@
-// import { transaction } from "#models/transaction.js";
+import transaction from "#models/transaction.model.js";
 // import * as userServices from "#services/user/index.js";
 
-import { now } from "mongoose";
-
 export const addTransaction = async ({
-  date = now(),
+  date,
   type,
   category,
   comment,
-  sum,
+  amount,
 }) => {
-  return null;
+  // return null;
   const transaction = {
     date,
     type,
     category,
     comment,
-    sum,
+    amount,
     // owner: await userServices.getById(userId),
   };
   const newTransaction = await transaction.create(transaction);
