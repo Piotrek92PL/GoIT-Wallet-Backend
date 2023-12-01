@@ -1,15 +1,24 @@
-// import { Contact } from "#models/contact.js";
+// import { transaction } from "#models/transaction.js";
 // import * as userServices from "#services/user/index.js";
 
-export const addTransaction = async ({}) => {
+import { now } from "mongoose";
+
+export const addTransaction = async ({
+  date = now(),
+  type,
+  category,
+  comment,
+  sum,
+}) => {
   return null;
-  // const contact = {
-  //   name,
-  //   email,
-  //   phone,
-  //   favorite,
-  //   owner: await userServices.getById(userId),
-  // };
-  // const newContact = await Contact.create(contact);
-  // return newContact;
+  const transaction = {
+    date,
+    type,
+    category,
+    comment,
+    sum,
+    // owner: await userServices.getById(userId),
+  };
+  const newTransaction = await transaction.create(transaction);
+  return newTransaction;
 };
