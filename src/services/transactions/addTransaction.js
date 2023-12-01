@@ -1,4 +1,4 @@
-import transaction from "#models/transaction.model.js";
+import transactionModel from "#models/transaction.model.js";
 // import * as userServices from "#services/user/index.js";
 
 export const addTransaction = async ({
@@ -17,6 +17,6 @@ export const addTransaction = async ({
     amount,
     // owner: await userServices.getById(userId),
   };
-  const newTransaction = await transaction.create(transaction);
+  const newTransaction = await transactionModel.create(transaction);
   return newTransaction;
 };

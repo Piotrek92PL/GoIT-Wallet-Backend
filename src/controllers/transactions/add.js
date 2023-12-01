@@ -1,4 +1,4 @@
-// import * as services from "#services/contacts/index.js";
+// import * as services from "#services/transactions/index.js";
 
 export const add = async (req, res, next) => {
   // return res.status(202).json({
@@ -6,15 +6,16 @@ export const add = async (req, res, next) => {
   //   message: `Endpoint not in service - work in progress.`,
   // });
   try {
-    const { name, email, phone, favorite } = req.body;
+    const { date, type, category, comment, amount } = req.body;
     const userId = req.user.id;
 
     if (services.validateContact(req.body)) {
       const result = await services.addContact({
-        name,
-        email,
-        phone,
-        favorite,
+        date,
+        type,
+        category,
+        comment,
+        amount,
         userId,
       });
       return res.json({
