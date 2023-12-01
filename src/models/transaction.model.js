@@ -5,22 +5,22 @@ const { Schema } = mongoose;
 const TransactionSchema = new Schema({
   type: {
     type: String,
-    required: [true, "Type is required"],
-    enum: ["income", "expense"],
+    required: [true, 'Type is required'],
+    enum: ['income', 'expense'],
   },
   category: {
     type: String,
-    required: [true, "Category is required"],
+    required: [true, 'Category is required'],
     trim: true,
   },
   amount: {
     type: Number,
-    required: [true, "Amount is required"],
+    required: [true, 'Amount is required'],
     validate: {
       validator: function (value) {
         return value > 0;
       },
-      message: "Amount must be a positive number",
+      message: 'Amount must be a positive number',
     },
   },
   date: {
@@ -34,9 +34,9 @@ const TransactionSchema = new Schema({
   },
   owner: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
 });
 
-const Transaction = mongoose.model("Transaction", TransactionSchema);
+const Transaction = mongoose.model('Transaction', TransactionSchema);
 export default Transaction;
