@@ -34,7 +34,6 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); //shows Swa
 
 app.use("/api/transactions", transactionRouter); //returns [] list of all transactions
 app.use("/api/users", routerUsers);
-// Error handling
 
 const PORT = process.env.PORT || 3000;
 
