@@ -1,25 +1,20 @@
 import * as services from "#services/transactions/index.js";
 
-export const getById = async (req, res, next) => {
-  // return res.status(202).json({
-  //   status: 202,
-  //   message: `Endpoint not in service - work in progress.`,
-  //   data: {},
-  // });
+export const remove = async (req, res, next) => {
   try {
     const transactionId = req.params.id;
     const userId = req.user.id;
-    const transaction = await services.getById({ userId, transactionId });
+    const deleted = await services.removeTransaction({ transactionId, userId });
 
-    if (transaction) {
+    if (deleted) {
       return res.json({
         status: 200,
-        data: transaction,
+        message: "Transaction deleted",
       });
     }
     return res.status(404).json({
       status: 404,
-      message: `[${transactionId}] Not found.`,
+      message: `[${transactionId}] Not found. Could not delete`,
     });
   } catch (err) {
     return res.status(500).json({

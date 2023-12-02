@@ -88,4 +88,6 @@ router.post("/", transactionController.add);
  */
 router.put("/:id", transactionController.update);
 
+router.delete("/:id", transactionController.remove);
+
 export default router;

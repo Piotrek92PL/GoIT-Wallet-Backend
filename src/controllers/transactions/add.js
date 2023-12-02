@@ -1,28 +1,24 @@
-// import * as services from "#services/transactions/index.js";
+import * as services from "#services/transactions/index.js";
 
 export const add = async (req, res, next) => {
-  // return res.status(202).json({
-  //   status: 202,
-  //   message: `Endpoint not in service - work in progress.`,
-  // });
   try {
-    const { date, type, category, comment, amount } = req.body;
-    const userId = req.user.id;
+    const { date, type, category, comment, amount, userId } = req.body; //usunac z tad userId
+    // const userId = req.user.id; //do wstawienia jak bedziemy miec auth
 
-    if (services.validateContact(req.body)) {
-      const result = await services.addContact({
-        date,
-        type,
-        category,
-        comment,
-        amount,
-        userId,
-      });
-      return res.json({
-        status: 200,
-        data: result["_id"],
-      });
-    }
+    // if (validateContact(req.body)) {
+    const result = await services.addContact({
+      date,
+      type,
+      category,
+      comment,
+      amount,
+      userId,
+    });
+    return res.json({
+      status: 200,
+      data: result["_id"],
+    });
+    // }
     return res.status(400).json({
       status: 400,
       message: "Missing required field",
