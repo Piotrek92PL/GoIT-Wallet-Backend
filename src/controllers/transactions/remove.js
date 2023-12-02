@@ -3,7 +3,8 @@ import * as services from "#services/transactions/index.js";
 export const remove = async (req, res, next) => {
   try {
     const transactionId = req.params.id;
-    const userId = req.user.id;
+    const { userId } = req.body; //do usuniecia
+    // const userId = req.user.id;//do wstawienia jak bedziemy miec auth
     const deleted = await services.removeTransaction({ transactionId, userId });
 
     if (deleted) {

@@ -8,7 +8,8 @@ export const getById = async (req, res, next) => {
   // });
   try {
     const transactionId = req.params.id;
-    const userId = req.user.id;
+    const { userId } = req.body; //do usuniecia
+    // const userId = req.user.id;//do wstawienia jak bedziemy miec auth
     const transaction = await services.getById({ userId, transactionId });
 
     if (transaction) {

@@ -5,8 +5,8 @@ export const add = async (req, res, next) => {
     const { date, type, category, comment, amount, userId } = req.body; //usunac z tad userId
     // const userId = req.user.id; //do wstawienia jak bedziemy miec auth
 
-    // if (validateContact(req.body)) {
-    const result = await services.addContact({
+    // if (validateTransaction(req.body)) { //validator do zrobienia
+    const result = await services.addTransaction({
       date,
       type,
       category,
@@ -18,7 +18,7 @@ export const add = async (req, res, next) => {
       status: 200,
       data: result["_id"],
     });
-    // }
+    // } //validacja nieudana:
     return res.status(400).json({
       status: 400,
       message: "Missing required field",
