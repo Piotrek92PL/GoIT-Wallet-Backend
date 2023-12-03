@@ -31,11 +31,23 @@ const routerUsers = express.Router();
  *               password:
  *                 type: string
  *                 format: password
+ *                 example: Password@123
+ *           examples:
+ *             duplicate_example:
+ *               value:
+ *                 email: "gooduser@example.com"
+ *                 password: "GoodPwd@123"
+ *             bad_password_example:
+ *               value:
+ *                 email: "baduser@example.com"
+ *                 password: "badpassword"
  *     responses:
  *       201:
  *         description: User successfully registered.
  *       400:
  *         description: Invalid input.
+ *       409:
+ *         description: Email in use
  */
 routerUsers.post("/signup", validateUserQuery, register);
 
@@ -58,9 +70,20 @@ routerUsers.post("/signup", validateUserQuery, register);
  *               email:
  *                 type: string
  *                 format: email
+ *                 example: user@example.com
  *               password:
  *                 type: string
  *                 format: password
+ *                 example: GoodPassword@123
+ *           examples:
+ *             valid_credentials:
+ *               value:
+ *                 email: "gooduser@example.com"
+ *                 password: "GoodPwd@123"
+ *             invalid_credentials:
+ *               value:
+ *                 email: "invaliduser@example.com"
+ *                 password: "BadPwd@123"
  *     responses:
  *       200:
  *         description: Successfully logged in.
