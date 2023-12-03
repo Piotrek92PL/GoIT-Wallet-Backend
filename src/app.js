@@ -4,6 +4,7 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import transactionRouter from "#routes/transactionRoutes.js";
+import categoryRouter from "#routes/categoryRoutes.js";
 import dotenv from "dotenv";
 // import "#config/passport.js";
 
@@ -31,7 +32,8 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); //shows Swagger documentation
 
-app.use("/api/transactions", transactionRouter); //returns [] list of all transactions
+app.use("/api/transactions", transactionRouter);
+app.use("/api/category", categoryRouter);
 
 // Error handling
 
