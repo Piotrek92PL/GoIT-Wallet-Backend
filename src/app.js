@@ -6,7 +6,8 @@ import swaggerJsdoc from "swagger-jsdoc";
 import transactionRouter from "#routes/transactionRoutes.js";
 import categoryRouter from "#routes/categoryRoutes.js";
 import dotenv from "dotenv";
-// import "#config/passport.js";
+import "#config/config-passport.js";
+import routerUsers from "#routes/routerUsers.js";
 
 const app = express();
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); //shows Swa
 
 app.use("/api/transactions", transactionRouter);
 app.use("/api/category", categoryRouter);
+app.use("/api/users", routerUsers);
 
 // Error handling
 
