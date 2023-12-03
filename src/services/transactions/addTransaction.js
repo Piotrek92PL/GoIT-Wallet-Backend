@@ -1,15 +1,24 @@
-// import { Contact } from "#models/contact.js";
-// import * as userServices from "#services/user/index.js";
+import Transaction from "#models/transaction.model.js";
+import mongoose from "mongoose"; //do usuniecia
+// import * as userServices from "#services/user/index.js"; //do wstawienia
 
-export const addTransaction = async ({}) => {
-  return null;
-  // const contact = {
-  //   name,
-  //   email,
-  //   phone,
-  //   favorite,
-  //   owner: await userServices.getById(userId),
-  // };
-  // const newContact = await Contact.create(contact);
-  // return newContact;
+export const addTransaction = async ({
+  date,
+  type,
+  category,
+  comment,
+  amount,
+  userId,
+}) => {
+  const transaction = {
+    date,
+    type,
+    category,
+    comment,
+    amount,
+    owner: new mongoose.Types.ObjectId(userId), //do usuniecia
+    // owner: await userServices.getById(userId), //do wstawienia
+  };
+  const newTransaction = await Transaction.create(transaction);
+  return newTransaction;
 };

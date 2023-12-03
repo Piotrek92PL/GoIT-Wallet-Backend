@@ -1,8 +1,7 @@
-// import mongoose from "mongoose";
-// import { Contact } from "#models/contact.js";
+import mongoose from "mongoose";
+import Transaction from "#models/transaction.model.js";
 
-export const getById = async ({ contactId, userId }) => {
-  return null;
-  // const ObjectId = new mongoose.Types.ObjectId(userId);
-  // return Contact.find({ _id: contactId, owner: ObjectId });
+export const getById = async ({ transactionId, userId }) => {
+  const userObjectId = new mongoose.Types.ObjectId(userId);
+  return Transaction.find({ _id: transactionId, owner: userObjectId });
 };

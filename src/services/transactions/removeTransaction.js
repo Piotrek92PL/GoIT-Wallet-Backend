@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
 import Transaction from "#models/transaction.model.js";
 
-export const updateTransaction = ({ transactionId, userId, newData }) => {
+export const removeTransaction = async ({ transactionId, userId }) => {
   const userObjectId = new mongoose.Types.ObjectId(userId);
   const transactionObjectId = new mongoose.Types.ObjectId(transactionId);
   const filter = { _id: transactionObjectId, owner: userObjectId };
-  return Transaction.findOneAndUpdate(filter, newData, { new: true });
+  const deleted = await Transaction.deleteOne(filter);
+  return deleted ? deleted.deletedCount > 0 : null;
 };
