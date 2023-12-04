@@ -1,5 +1,6 @@
 import express from "express";
 import * as transactionController from "#controllers/transactions/index.js";
+import { jwtAuth } from "#services/auth/jwtAuth.js";
 const router = express.Router();
 
 /**
@@ -12,7 +13,7 @@ const router = express.Router();
  *       200:
  *         description: A list of transactions.
  */
-router.get("/", transactionController.getAll);
+router.get("/", jwtAuth, transactionController.getAll);
 
 /**
  * @swagger
@@ -33,7 +34,7 @@ router.get("/", transactionController.getAll);
  *       404:
  *         description: Transaction not found.
  */
-router.get("/:id", transactionController.getById);
+router.get("/:id", jwtAuth, transactionController.getById);
 
 /**
  * @swagger
@@ -55,7 +56,7 @@ router.get("/:id", transactionController.getById);
  *       400:
  *         description: Invalid request body.
  */
-router.post("/", transactionController.add);
+router.post("/", jwtAuth, transactionController.add);
 
 /**
  * @swagger
@@ -86,8 +87,8 @@ router.post("/", transactionController.add);
  *       400:
  *         description: Invalid request body.
  */
-router.put("/:id", transactionController.update);
+router.put("/:id", jwtAuth, transactionController.update);
 
-router.delete("/:id", transactionController.remove);
+router.delete("/:id", jwtAuth, transactionController.remove);
 
 export default router;

@@ -2,9 +2,9 @@ import * as services from "#services/transactions/index.js";
 
 export const update = async (req, res, next) => {
   try {
-    const { date, type, category, comment, amount, userId } = req.body; //usunac z tad userId
+    const { date, type, category, comment, amount } = req.body;
     const transactionId = req.params.id;
-    // const userId = req.user.id;//do wstawienia jak bedziemy miec auth
+    const userId = req.user.id;
 
     // if (services.validateTransaction(req.body)) { //validacja
     const newData = {
