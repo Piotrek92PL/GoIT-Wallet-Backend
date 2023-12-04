@@ -4,8 +4,10 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import swaggerJsdoc from "swagger-jsdoc";
 import transactionRouter from "#routes/transactionRoutes.js";
+import categoryRouter from "#routes/categoryRoutes.js";
 import dotenv from "dotenv";
-// import "#config/passport.js";
+import "#config/config-passport.js";
+import routerUsers from "#routes/routerUsers.js";
 
 const app = express();
 dotenv.config();
@@ -31,7 +33,9 @@ const options = {
 const swaggerSpec = swaggerJsdoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec)); //shows Swagger documentation
 
-app.use("/api/transactions", transactionRouter); //returns [] list of all transactions
+app.use("/api/transactions", transactionRouter);
+app.use("/api/category", categoryRouter);
+app.use("/api/users", routerUsers);
 
 // Error handling
 
