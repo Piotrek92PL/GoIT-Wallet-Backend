@@ -2,8 +2,8 @@ import * as services from "#services/transactions/index.js";
 
 export const add = async (req, res, next) => {
   try {
-    const { date, type, category, comment, amount, userId } = req.body; //usunac z tad userId
-    // const userId = req.user.id; //do wstawienia jak bedziemy miec auth
+    const { date, type, category, comment, amount } = req.body;
+    const userId = req.user.id;
 
     // if (validateTransaction(req.body)) { //validator do zrobienia
     const result = await services.addTransaction({

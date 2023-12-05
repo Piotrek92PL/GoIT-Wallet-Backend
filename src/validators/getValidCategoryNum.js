@@ -22,8 +22,5 @@ export const getValidCategoryNum = async (categoryNumber) => {
       ? otherCategory.id
       : 1
     : 1;
-  console.log(
-    `isCatNum[${isCatNum}] ? num[${num}] : alternativeNum[${alternativeNum}]`
-  );
   return isCatNum ? num : alternativeNum;
 };

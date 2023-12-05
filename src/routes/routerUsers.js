@@ -6,6 +6,7 @@ import { login } from "#ctrlUser/loginUser.js";
 import { logout } from "#ctrlUser/logoutUser.js";
 import { getCurrentUser } from "#ctrlUser/getCurrentUser.js";
 import { validateUserQuery } from "#validators/userQueryValidator.js";
+import { jwtAuth } from "#services/auth/jwtAuth.js";
 
 const routerUsers = express.Router();
 
@@ -106,11 +107,7 @@ routerUsers.post("/login", validateUserQuery, login);
  *       401:
  *         description: Unauthorized or not logged in.
  */
-routerUsers.get(
-  "/logout",
-  passport.authenticate("jwt", { session: false }),
-  logout
-);
+routerUsers.get("/logout", jwtAuth, logout);
 
 /**
  * @swagger
@@ -135,10 +132,6 @@ routerUsers.get(
  *       401:
  *         description: Unauthorized or not logged in.
  */
-routerUsers.get(
-  "/current",
-  passport.authenticate("jwt", { session: false }),
-  getCurrentUser
-);
+routerUsers.get("/current", jwtAuth, getCurrentUser);
 
 export default routerUsers;

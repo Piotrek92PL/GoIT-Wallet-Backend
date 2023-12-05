@@ -1,14 +1,4 @@
 import mongoose from "mongoose";
-// import * as services from "#services/categories/index.js";
-
-// const isCategoryNum = async (num) => {
-//   const categories = await services.getCategories();
-//   const isCatNum =
-//     (await categories.find((cat) => {
-//       return cat.id === num;
-//     })) !== undefined;
-//   return isCatNum;
-// };
 
 const { Schema } = mongoose;
 
@@ -28,10 +18,6 @@ const TransactionSchema = new Schema({
       },
       message: "Type must be a positive number",
     },
-    // validate: {
-    //   validator: await isCategoryNum,
-    //   message: "Type must match existing category number",
-    // },
   },
   amount: {
     type: Number,

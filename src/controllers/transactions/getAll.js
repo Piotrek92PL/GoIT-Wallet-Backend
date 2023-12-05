@@ -2,8 +2,7 @@ import * as services from "#services/transactions/index.js";
 
 export const getAll = async (req, res, next) => {
   try {
-    const { userId } = req.body; //do usuniecia
-    // const userId = req.user.id;//do wstawienia jak bedziemy miec auth
+    const userId = req.user.id;
     const transactions = await services.listTransactions({ userId });
     return res.json({
       status: 200,

@@ -1,5 +1,6 @@
 import express from "express";
 import * as transactionController from "#controllers/transactions/index.js";
+import { jwtAuth } from "#services/auth/jwtAuth.js";
 const router = express.Router();
 
 /**
@@ -12,7 +13,7 @@ const router = express.Router();
  *       200:
  *         description: A list of transactions.
  */
-router.get("/", transactionController.getAll);
+router.get("/", jwtAuth, transactionController.getAll);
 
 /**
  * @swagger
@@ -33,7 +34,7 @@ router.get("/", transactionController.getAll);
  *       404:
  *         description: Transaction not found.
  */
-router.get("/:id", transactionController.getById);
+router.get("/:id", jwtAuth, transactionController.getById);
 
 /**
   * @swagger
@@ -95,7 +96,7 @@ router.get("/:id", transactionController.getById);
  *                   status: 400
  *                   message: "Missing required field"
  */
-router.post("/", transactionController.add);
+router.post("/", jwtAuth, transactionController.add);
 
 /**
  * @swagger
@@ -166,8 +167,7 @@ router.post("/", transactionController.add);
  *                   status: 400
  *                   message: "Missing required field"
  */
-router.put("/:id", transactionController.update);
-
+router.put("/:id", jwtAuth, transactionController.update);
 /**
  * @swagger
  * /api/transactions/{id}:
@@ -218,7 +218,6 @@ router.put("/:id", transactionController.update);
  *                   status: 500
  *                   message: "Internal server error: [error_message]"
  */
-
-router.delete("/:id", transactionController.remove);
+router.delete("/:id", jwtAuth, transactionController.remove);
 
 export default router;
