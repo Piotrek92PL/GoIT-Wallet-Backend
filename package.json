@@ -20,7 +20,8 @@
     "#models/*": "./src/models/*",
     "#validators/*": "./src/validators/*",
     "#ctrlUser/*": "./src/controllers/ctrlUser/*",
-    "#config/*": "./src/config/*"
+    "#config/*": "./src/config/*",
+    "#utils/*": "./src/utils/*"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

@@ -3,3 +3,4 @@ export * from "./getById.js";
 export * from "./add.js";
 export * from "./remove.js";
 export * from "./update.js";
+export * from "./statsByDate.js";
