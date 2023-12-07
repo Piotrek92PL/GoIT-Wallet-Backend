@@ -13,7 +13,7 @@ const app = express();
 dotenv.config();
 
 // app.use(logger(formatsLogger));
-app.use(express.urlencoded({ extended: true })); // dodane
+app.use(express.urlencoded({ extended: true })); 
 app.use(cors());
 app.use(express.json());
 
