@@ -1,4 +1,4 @@
-import * as services from "#services/transactions/index.js";
+import * as services from '#services/transactions/index.js';
 
 export const add = async (req, res, next) => {
   try {
@@ -16,12 +16,12 @@ export const add = async (req, res, next) => {
     });
     return res.json({
       status: 200,
-      data: result["_id"],
+      data: result['_id'],
     });
     // } //validacja nieudana:
     return res.status(400).json({
       status: 400,
-      message: "Missing required field",
+      message: 'Missing required field',
     });
   } catch (err) {
     return res.status(500).json({

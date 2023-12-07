@@ -37,6 +37,40 @@ router.get("/", jwtAuth, transactionController.getAll);
 router.get("/:id", jwtAuth, transactionController.getById);
 
 /**
+ * @swagger
+ * /api/transactions/stats/{userId}/{year}/{month}:
+ *   get:
+ *     summary: Get detailed user's transactions statistics for a specific month and year.
+ *     description: Returns detailed statistics including all transactions for the given month and year.
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: User ID.
+ *       - in: path
+ *         name: year
+ *         schema:
+ *           type: number
+ *         required: true
+ *         description: Year of the transactions.
+ *       - in: path
+ *         name: month
+ *         schema:
+ *           type: number
+ *         required: true
+ *         description: Month of the transactions.
+ *     responses:
+ *       200:
+ *         description: Detailed statistics of user's transactions.
+ *       404:
+ *         description: No transactions found for the specified period.
+ */
+router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUserStatisticsByDate);
+
+
+/**
   * @swagger
  * /api/transactions:
  *   post:
