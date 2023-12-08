@@ -1,4 +1,4 @@
-import Category from "#models/Category.model.js";
+import Category from "#models/category.model.js";
 
 const DEFAULT_CATEGORIES = [
   { name: "Income", id: 1, color: "#FED057" },
