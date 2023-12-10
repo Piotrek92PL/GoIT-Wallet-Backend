@@ -17,7 +17,7 @@ export const register = async (req, res, next) => {
     });
 
     const token = jwt.sign({ id: user._id }, process.env.SECRET, {
-      expiresIn: "1h",
+      expiresIn: "5h",
     });
     await userService.updateToken(user._id, token);
 
