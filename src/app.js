@@ -15,7 +15,18 @@ dotenv.config();
 // app.use(logger(formatsLogger));
 app.use(express.urlencoded({ extended: true }));
 const corsOptions = {
-  origin: "*",
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+    ];
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
 };
 
 app.use(cors(corsOptions));
