@@ -41,7 +41,7 @@ const options = {
       description: "Personal budget app",
     },
   },
-  apis: ["./routes/*.js"],
+  apis: ["src/routes/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

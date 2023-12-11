@@ -1,6 +1,5 @@
 import express from "express";
 import passport from "passport";
-
 import { register } from "#ctrlUser/registerUser.js";
 import { login } from "#ctrlUser/loginUser.js";
 import { logout } from "#ctrlUser/logoutUser.js";
@@ -12,8 +11,16 @@ const routerUsers = express.Router();
 
 /**
  * @swagger
+ * tags:
+ *   name: Users
+ *   description: API operations related to user management
+ */
+
+/**
+ * @swagger
  * /api/users/signup:
  *   post:
+ *     tags: [Users]
  *     summary: Register a new user.
  *     description: Creates a new user account.
  *     requestBody:
@@ -56,6 +63,7 @@ routerUsers.post("/signup", validateUserQuery, register);
  * @swagger
  * /api/users/login:
  *   post:
+ *     tags: [Users]
  *     summary: User login.
  *     description: Logs in a user and returns a token.
  *     requestBody:
@@ -97,6 +105,8 @@ routerUsers.post("/login", validateUserQuery, login);
  * @swagger
  * /api/users/logout:
  *   get:
+ *     tags:
+ *       - Users
  *     security:
  *       - bearerAuth: []
  *     summary: Log out a user.
@@ -106,6 +116,16 @@ routerUsers.post("/login", validateUserQuery, login);
  *         description: Successfully logged out.
  *       401:
  *         description: Unauthorized or not logged in.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "Not authorized"
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "Internal server error"
  */
 routerUsers.get("/logout", jwtAuth, logout);
 
@@ -113,10 +133,13 @@ routerUsers.get("/logout", jwtAuth, logout);
  * @swagger
  * /api/users/current:
  *   get:
+ *     tags: [Users]
  *     security:
  *       - bearerAuth: []
  *     summary: Get current user data.
  *     description: Retrieves the currently logged-in user's data.
+ *     produces:
+ *       - application/json
  *     responses:
  *       200:
  *         description: Information about the current user.
@@ -128,7 +151,6 @@ routerUsers.get("/logout", jwtAuth, logout);
  *                 email:
  *                   type: string
  *                   format: email
- *                 // Include other user properties here if applicable
  *       401:
  *         description: Unauthorized or not logged in.
  */
