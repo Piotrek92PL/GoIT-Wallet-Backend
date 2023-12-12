@@ -23,6 +23,7 @@ const routerUsers = express.Router();
  *     tags: [Users]
  *     summary: Register a new user.
  *     description: Creates a new user account.
+ *     tags: [Authentication]
  *     requestBody:
  *       required: true
  *       content:
@@ -41,11 +42,11 @@ const routerUsers = express.Router();
  *                 format: password
  *                 example: Password@123
  *           examples:
- *             duplicate_example:
+ *             example:
  *               value:
  *                 email: "gooduser@example.com"
  *                 password: "GoodPwd@123"
- *             bad_password_example:
+*             bad_password_example:
  *               value:
  *                 email: "baduser@example.com"
  *                 password: "badpassword"
@@ -55,17 +56,22 @@ const routerUsers = express.Router();
  *       400:
  *         description: Invalid input.
  *       409:
- *         description: Email in use
+ *         description: Email in use.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Email in use
  */
 routerUsers.post("/signup", validateUserQuery, register);
 
 /**
- * @swagger
+  * @swagger
  * /api/users/login:
  *   post:
  *     tags: [Users]
  *     summary: User login.
  *     description: Logs in a user and returns a token.
+ *     tags: [Authentication]
  *     requestBody:
  *       required: true
  *       content:
@@ -96,13 +102,23 @@ routerUsers.post("/signup", validateUserQuery, register);
  *     responses:
  *       200:
  *         description: Successfully logged in.
+ *         content:
+ *           application/json:
+ *             example:
+ *               token: "JWT_TOKEN"
+ *               user:
+ *                 email: "user@example.com"
  *       401:
  *         description: Unauthorized.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "Email or password is wrong"
  */
 routerUsers.post("/login", validateUserQuery, login);
 
 /**
- * @swagger
+  * @swagger
  * /api/users/logout:
  *   get:
  *     tags:
@@ -111,6 +127,7 @@ routerUsers.post("/login", validateUserQuery, login);
  *       - bearerAuth: []
  *     summary: Log out a user.
  *     description: Logs out a user by removing their authentication token.
+ *     tags: [Authentication]
  *     responses:
  *       204:
  *         description: Successfully logged out.

@@ -22,16 +22,34 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: A list of transactions.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 200
+ *               data:
+ *                 - transaction1
+ *                 - transaction2
+ *                 - transaction3
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 500
+ *               message: "Internal server error: [error_message]"
  */
 router.get("/", jwtAuth, transactionController.getAll);
 
 /**
- * @swagger
+  * @swagger
  * /api/transactions/{id}:
  *   get:
  *     tags: [Transactions]
  *     summary: Get a transaction by ID.
  *     description: Returns a single transaction by ID.
+ *     tags: [Transactions]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -44,18 +62,38 @@ router.get("/", jwtAuth, transactionController.getAll);
  *     responses:
  *       200:
  *         description: A single transaction.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 200
+ *               data: "transaction_details"
  *       404:
  *         description: Transaction not found.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 404
+ *               message: "[transactionId] Not found."
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 500
+ *               message: "Internal server error: [error_message]"
  */
 router.get("/:id", jwtAuth, transactionController.getById);
 
 /**
- * @swagger
+* @swagger
  * /api/transactions/stats/{userId}/{year}/{month}:
  *   get:
  *     tags: [Transactions]
  *     summary: Get detailed user's transactions statistics for a specific month and year.
  *     description: Returns detailed statistics including all transactions for the given month and year.
+ *     tags: [Transactions]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: userId
@@ -80,8 +118,26 @@ router.get("/:id", jwtAuth, transactionController.getById);
  *     responses:
  *       200:
  *         description: Detailed statistics of user's transactions.
- *       404:
- *         description: No transactions found for the specified period.
+ *         content:
+ *           application/json:
+ *             example:
+ *               transactions:
+ *                 - transaction1
+ *                 - transaction2
+ *               sumOfIncome: 1000.00
+ *               sumOfExpense: 500.00
+ *       400:
+ *         description: Invalid year or month.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "Invalid year or month"
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: "Internal server error: [error_message]"
  */
 router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUserStatisticsByDate);
 
@@ -92,6 +148,9 @@ router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUser
  *     tags: [Transactions]
  *     summary: Create a new transaction.
  *     description: Adds a new transaction to the list.
+ *     tags: [Transactions]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -115,7 +174,7 @@ router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUser
  *               amount:
  *                 type: number
  *                 example: 50.00
- *               userId:
+*               userId:
  *                 type: string
  *                 example: "user123"
  *           examples:
@@ -126,7 +185,7 @@ router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUser
  *                 category: "Household Products"
  *                 comment: "Monthly grocery shopping"
  *                 amount: 50.00
- *                 userId: "user123"
+*                 userId: "user123"
  *             invalid_transaction:
  *               value:
  *                 date: "2023-01-01"
@@ -138,15 +197,31 @@ router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUser
  *     responses:
  *       201:
  *         description: Transaction created successfully.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 201
+ *               data: "transaction_id"
  *       400:
  *         description: Invalid request body.
  *         content:
  *           application/json:
- *             examples:
- *               missing_field:
- *                 value:
- *                   status: 400
- *                   message: "Missing required field"
+ *             example:
+ *               status: 400
+ *               message: "Invalid transaction data"
+ *               errors:
+ *                 - "Invalid date format"
+ *                 - "Invalid type, must be either income or expense"
+ *                 - "Invalid category, must be a positive number"
+ *                 - "Invalid amount, must be a positive number"
+ *                 - "Comment must be a string"
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 500
+ *               message: "Internal server error: [error_message]"
  */
 router.post("/", jwtAuth, transactionController.add);
 

@@ -21,6 +21,21 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: A list of categories.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 200
+ *               data:
+ *                 - category1
+ *                 - category2
+ *                 - category3
+ *       500:
+ *         description: Internal server error.
+ *         content:
+ *           application/json:
+ *             example:
+ *               status: 500
+ *               message: Internal server error: <error_message>
  */
 router.get("/", categoriesController.getAll);
 
