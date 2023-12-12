@@ -5,13 +5,20 @@ const router = express.Router();
 
 /**
  * @swagger
+ * tags:
+ *   name: Transactions
+ *   description: API operations related to transactions
+ */
+
+/**
+ * @swagger
  * /api/transactions:
  *   get:
+ *     tags: [Transactions]
  *     summary: Get all transactions.
  *     description: Returns a list of all transactions.
- *     tags: [Transactions]
- *     security:
- *       - bearerAuth: []
+ *     produces:
+ *       - application/json
  *     responses:
  *       200:
  *         description: A list of transactions.
@@ -37,6 +44,7 @@ router.get("/", jwtAuth, transactionController.getAll);
   * @swagger
  * /api/transactions/{id}:
  *   get:
+ *     tags: [Transactions]
  *     summary: Get a transaction by ID.
  *     description: Returns a single transaction by ID.
  *     tags: [Transactions]
@@ -49,6 +57,8 @@ router.get("/", jwtAuth, transactionController.getAll);
  *           type: string
  *         required: true
  *         description: Transaction ID.
+ *     produces:
+ *       - application/json
  *     responses:
  *       200:
  *         description: A single transaction.
@@ -78,6 +88,7 @@ router.get("/:id", jwtAuth, transactionController.getById);
 * @swagger
  * /api/transactions/stats/{userId}/{year}/{month}:
  *   get:
+ *     tags: [Transactions]
  *     summary: Get detailed user's transactions statistics for a specific month and year.
  *     description: Returns detailed statistics including all transactions for the given month and year.
  *     tags: [Transactions]
@@ -102,6 +113,8 @@ router.get("/:id", jwtAuth, transactionController.getById);
  *           type: number
  *         required: true
  *         description: Month of the transactions.
+ *     produces:
+ *       - application/json
  *     responses:
  *       200:
  *         description: Detailed statistics of user's transactions.
@@ -128,12 +141,12 @@ router.get("/:id", jwtAuth, transactionController.getById);
  */
 router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUserStatisticsByDate);
 
-
 /**
-   * @swagger
+ * @swagger
  * /api/transactions:
  *   post:
- *     summary: Add a new transaction.
+ *     tags: [Transactions]
+ *     summary: Create a new transaction.
  *     description: Adds a new transaction to the list.
  *     tags: [Transactions]
  *     security:
@@ -178,7 +191,9 @@ router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUser
  *                 date: "2023-01-01"
  *                 type: "expense"
  *                 comment: "Monthly grocery shopping"
-*                 userId: "user123"
+ *                 userId: "user123"
+ *     produces:
+ *       - application/json
  *     responses:
  *       201:
  *         description: Transaction created successfully.
@@ -214,6 +229,7 @@ router.post("/", jwtAuth, transactionController.add);
  * @swagger
  * /api/transactions/{id}:
  *   put:
+ *     tags: [Transactions]
  *     summary: Update a transaction by ID.
  *     description: Updates a transaction by ID.
  *     parameters:
@@ -264,6 +280,8 @@ router.post("/", jwtAuth, transactionController.add);
  *                 comment: "Monthly salary deposit"
  *                 amount: 3000.00
  *                 userId: "user123"
+ *     produces:
+ *       - application/json
  *     responses:
  *       200:
  *         description: Transaction updated successfully.
@@ -280,10 +298,12 @@ router.post("/", jwtAuth, transactionController.add);
  *                   message: "Missing required field"
  */
 router.put("/:id", jwtAuth, transactionController.update);
+
 /**
  * @swagger
  * /api/transactions/{id}:
  *   delete:
+ *     tags: [Transactions]
  *     summary: Remove a transaction by ID.
  *     description: Removes a transaction by ID.
  *     parameters:
@@ -293,6 +313,9 @@ router.put("/:id", jwtAuth, transactionController.update);
  *           type: string
  *         required: true
  *         description: Transaction ID.
+ *     produces:
+ *       - application/json
+ *       - application/xml
  *     responses:
  *       200:
  *         description: Transaction deleted successfully.
