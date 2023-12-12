@@ -41,7 +41,7 @@ const router = express.Router();
 router.get("/", jwtAuth, transactionController.getAll);
 
 /**
-  * @swagger
+ * @swagger
  * /api/transactions/{id}:
  *   get:
  *     tags: [Transactions]
@@ -85,7 +85,7 @@ router.get("/", jwtAuth, transactionController.getAll);
 router.get("/:id", jwtAuth, transactionController.getById);
 
 /**
-* @swagger
+ * @swagger
  * /api/transactions/stats/{userId}/{year}/{month}:
  *   get:
  *     tags: [Transactions]
@@ -139,7 +139,11 @@ router.get("/:id", jwtAuth, transactionController.getById);
  *             example:
  *               message: "Internal server error: [error_message]"
  */
-router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUserStatisticsByDate);
+router.get(
+  "/stats/:year/:month",
+  jwtAuth,
+  transactionController.getUserStatisticsByDate
+);
 
 /**
  * @swagger
@@ -174,7 +178,7 @@ router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUser
  *               amount:
  *                 type: number
  *                 example: 50.00
-*               userId:
+ *               userId:
  *                 type: string
  *                 example: "user123"
  *           examples:
@@ -185,7 +189,7 @@ router.get("/stats/:userId/:year/:month", jwtAuth, transactionController.getUser
  *                 category: "Household Products"
  *                 comment: "Monthly grocery shopping"
  *                 amount: 50.00
-*                 userId: "user123"
+ *                 userId: "user123"
  *             invalid_transaction:
  *               value:
  *                 date: "2023-01-01"
@@ -276,7 +280,7 @@ router.post("/", jwtAuth, transactionController.add);
  *                 userId: "user123"
  *             invalid_update:
  *               value:
- *                 date: "2023-01-01"  
+ *                 date: "2023-01-01"
  *                 comment: "Monthly salary deposit"
  *                 amount: 3000.00
  *                 userId: "user123"
